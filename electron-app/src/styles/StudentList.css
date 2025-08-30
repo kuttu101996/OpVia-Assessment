@@ -1,0 +1,221 @@
+.student-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.student-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.student-list-header h2 {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.subject-filter {
+  min-width: 150px;
+}
+
+.subject-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.student-stats {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.no-students {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.student-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.student-table th {
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.student-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e5e9;
+  vertical-align: middle;
+}
+
+.student-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.student-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.student-email {
+  color: #666;
+  font-size: 14px;
+}
+
+.subject-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.subject-math { background-color: #e3f2fd; color: #1565c0; }
+.subject-science { background-color: #e8f5e8; color: #2e7d32; }
+.subject-english { background-color: #fff3e0; color: #ef6c00; }
+.subject-history { background-color: #fce4ec; color: #c2185b; }
+
+.grade-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.grade-excellent { background-color: #28a745; }
+.grade-good { background-color: #ffc107; color: #333; }
+.grade-average { background-color: #17a2b8; }
+.grade-poor { background-color: #dc3545; }
+
+.student-created {
+  color: #666;
+  font-size: 14px;
+}
+
+.student-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .student-list-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  .search-box,
+  .subject-filter {
+    min-width: auto;
+  }
+  
+  .student-table th,
+  .student-table td {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .student-actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
