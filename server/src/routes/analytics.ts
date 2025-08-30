@@ -1,63 +1,39 @@
-import express from 'express';
-import { getDatabase } from '../database/init';
-import { authenticateToken, AuthenticatedRequest } from '../middleware/auth';
-import { Analytics, ApiResponse } from '../types';
+import express from "express";
+import { query } from "express-validator";
+import { authenticateToken } from "../middleware/auth";
+import { Roles } from "../types/enums";
+import { authorize } from "../middleware/authorization";
+import { getAnalytics } from "../controllers/analytics";
 
 const router = express.Router();
 
+// Apply authentication middleware to all analytics routes
 router.use(authenticateToken);
 
+// Validation middleware for analytics query parameters
+const validateGetAnalytics = [
+  query("limit")
+    .optional()
+    .isInt({ min: 1, max: 50 })
+    .withMessage("Limit must be between 1 and 50")
+    .toInt(),
+
+  query("subject")
+    .optional()
+    .isIn(["Math", "Science", "English", "History"])
+    .withMessage("Subject must be one of: Math, Science, English, History"),
+];
+
 /**
- * GET /analytics
- * Get dashboard analytics including total count, average by subject, and recent additions
+ * Get analytics data
+ * @route GET /api/analytics
+ * @access Private - requires authentication and admin/teacher role
  */
-router.get('/', async (req: AuthenticatedRequest, res: express.Response<ApiResponse<Analytics>>) => {
-  try {
-    const db = getDatabase();
-
-    // Get total student count
-    const totalResult = await db.get('SELECT COUNT(*) as count FROM students');
-    const totalStudents = totalResult.count;
-
-    // Get average grade by subject
-    const averageBySubject = await db.all(`
-      SELECT subject, AVG(grade) as average 
-      FROM students 
-      GROUP BY subject
-    `);
-    
-    const averageGradeBySubject: { [subject: string]: number } = {};
-    averageBySubject.forEach(row => {
-      averageGradeBySubject[row.subject] = Math.round(row.average * 100) / 100;
-    });
-
-    // Get recent additions (last 10 students)
-    const rawRecentAdditions = await db.all(`
-      SELECT * FROM students 
-      ORDER BY created_at DESC 
-      LIMIT 10
-    `);
-    
-    const recentAdditions = rawRecentAdditions;
-
-    const analytics: Analytics = {
-      totalStudents,
-      averageGradeBySubject,
-      recentAdditions
-    };
-
-    res.json({
-      success: true,
-      data: analytics,
-      message: 'Analytics retrieved successfully'
-    });
-  } catch (error) {
-    console.error('Get analytics error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to retrieve analytics'
-    });
-  }
-});
+router.get(
+  "/",
+  authorize([Roles.ADMIN, Roles.TEACHER]),
+  validateGetAnalytics,
+  getAnalytics
+);
 
 export default router;

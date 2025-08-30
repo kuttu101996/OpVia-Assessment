@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStudents } from '../hooks/useApi'
+import { useActiveTab } from '../contexts/ActiveTabContext'
 
 const StudentList: React.FC = () => {
+  const { setActiveTab } = useActiveTab()
   const [selectedSubject, setSelectedSubject] = useState<string>('')
   const [searchTerm, setSearchTerm] = useState('')
   const { students, loading, error, deleteStudent } = useStudents(selectedSubject || undefined)
@@ -47,6 +49,10 @@ const StudentList: React.FC = () => {
     if (grade >= 70) return 'bg-yellow-100 text-yellow-800'
     return 'bg-red-100 text-red-800'
   }
+
+  useEffect(()=> {
+    setActiveTab('students')
+  }, [])
 
   if (loading) {
     return (

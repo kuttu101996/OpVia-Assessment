@@ -1,7 +1,7 @@
 import express, {Response} from 'express';
 import { body, validationResult } from 'express-validator';
 import { generateToken } from '../middleware/auth';
-import { AuthRequest, AuthResponse, ApiResponse } from '../types';
+import { Roles } from '../types/enums';
 
 const router = express.Router();
 
@@ -42,13 +42,13 @@ router.post('/login', [
     }
 
     // Generate JWT token
-    const token = generateToken(username);
+    const token = generateToken({username, role: Roles.TEACHER, id: 1});
 
     res.json({
       success: true,
       data: {
         token,
-        user: { username }
+        user: { username, role: Roles.TEACHER }
       },
       message: 'Login successful'
     });

@@ -31,9 +31,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (username: string, password: string): Promise<void> => {
     try {
       const response = await authApi.login({ username, password });
-      console.log("username - ", username)
-      console.log("password - ", password)
-      console.log("response - ", response)
       
       if (response.success && response.data) {
         const { token: authToken, user: userData } = response.data;
@@ -45,9 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Persist auth data
         localStorage.setItem('auth_token', authToken);
         localStorage.setItem('auth_user', JSON.stringify(userData));
-      } else {
-        throw new Error(response.error || 'Login failed');
-      }
+      } else throw new Error(response.error || 'Login failed');
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -82,8 +77,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
+  if (context === undefined) 
     throw new Error('useAuth must be used within an AuthProvider');
-  }
+
   return context;
 };
