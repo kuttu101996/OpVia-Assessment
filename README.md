@@ -1,257 +1,174 @@
 # Teacher Dashboard - Desktop Application
 
-A comprehensive Teacher Dashboard desktop application built with Electron, React, TypeScript, and Express. This application allows teachers to manage student records, view analytics, and perform CRUD operations with a modern, responsive interface.
+A comprehensive Teacher Dashboard desktop application built with **Electron, React, TypeScript, TailwindCSS (frontend)** and **Node.js, Express, SQLite, TypeScript (backend)**.  
+The application allows teachers to manage student records, perform CRUD operations, view analytics, and authenticate securely using JWT.
+
+---
 
 ## 🚀 Features
 
 ### Backend (Express + TypeScript)
-- **JWT Authentication** with hardcoded credentials
+- **JWT Authentication** (hardcoded credentials)
 - **SQLite Database** with students table
-- **RESTful API** endpoints for all operations
-- **Input Validation** with express-validator
+- **RESTful API** endpoints (CRUD + analytics)
+- **Input Validation** with `express-validator`
 - **Error Handling** middleware
-- **CORS Support** for Electron app integration
+- **CORS Support** for Electron integration
 
 ### Frontend (Electron + React + TypeScript)
-- **Modern UI** with responsive design
-- **Authentication Flow** with login/logout
-- **Student Management** with full CRUD operations
-- **Search & Filter** functionality by subject
-- **Analytics Dashboard** with performance metrics
-- **Form Validation** with react-hook-form and Yup
-- **Loading States** and error handling
+- **Modern UI** with TailwindCSS
+- **Authentication Flow** (login/logout)
+- **Student Management** (CRUD)
+- **Search & Filter** students by subject
+- **Analytics Dashboard** with statistics
+- **Form Validation** with `react-hook-form` + `Yup`
+- **Loading States** & error handling
+- **Fixed Window Size**: 1200x800 (non-resizable)
+
+---
 
 ## 📋 Requirements Met
 
 ✅ **Backend Requirements**
-- Express server with TypeScript
-- SQLite database with students table (id, name, email, subject, grade, created_at)
-- JWT authentication with hardcoded credentials (username: "teacher", password: "password123")
-- All required API endpoints implemented
-- Input validation and error handling
-- Server runs on port 3001 with CORS enabled
+- Express server with TypeScript  
+- SQLite database with `students` table (`id, name, email, subject, grade, created_at`)  
+- JWT authentication with hardcoded credentials (`teacher / password123`)  
+- Full CRUD endpoints + analytics endpoint  
+- Input validation and error handling  
+- Runs on port `3001` with CORS enabled  
 
 ✅ **Frontend Requirements**
-- Electron desktop app with React and TypeScript
-- Login form with validation
-- Student list with search and filter
-- Add/Edit student form with validation
-- Analytics dashboard with statistics
-- Functional components with hooks
-- Custom API hooks for data fetching
-- Authentication context for state management
-- Window size: 1200x800, not resizable
+- Electron app with React + TypeScript  
+- Login form with validation  
+- Student list with search/filter  
+- Add/Edit student form with validation  
+- Analytics dashboard with statistics  
+- Functional components + hooks  
+- Custom API hooks and Auth Context  
+- Window size 1200x800, not resizable  
+
+---
 
 ## 🛠 Installation & Setup
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
+- **Node.js** (v16 or higher)  
+- **npm** (comes with Node)
 
-### Backend Setup
+---
+
+### Running Locally
+
+> ⚠️ **Requires two terminals** (one for frontend/Electron, one for backend server).
+
+#### 1. Backend (Server)
 ```bash
 cd server
 npm install
 npm run dev
 ```
 
-### Frontend Setup
+#### 2. Frontend (Electron App)
 ```bash
 cd electron-app
 npm install
-npm start
+npm run build
+npm run electron
 ```
+
+---
 
 ## 🔧 Available Scripts
 
-### Backend (server/)
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Build TypeScript to JavaScript
-- `npm start` - Start production server
+### Backend (`/server`)
+- `npm run dev` → Start development server with hot reload  
+- `npm run build` → Compile TypeScript to JavaScript  
+- `npm start` → Start production server  
 
-### Frontend (electron-app/)
-- `npm start` - Start Electron app in development mode
-- `npm run react-dev` - Start React development server only
-- `npm run build` - Build React app and compile TypeScript
-- `npm run dist` - Create distributable Electron app
+### Frontend (`/electron-app`)
+- `npm run electron` → Run Electron app  
+- `npm run electron-dev` → Run React dev server + Electron together  
+- `npm run electron-build` → Build React + Electron  
+- `npm run dist` → Create distributable desktop app  
 
-## 📁 Project Structure
-
-```
-wp-auto-electron-react/
-├── server/                     # Backend Express server
-│   ├── src/
-│   │   ├── database/
-│   │   │   └── init.ts        # Database initialization
-│   │   ├── middleware/
-│   │   │   ├── auth.ts        # JWT authentication
-│   │   │   └── errorHandler.ts
-│   │   ├── routes/
-│   │   │   ├── auth.ts        # Authentication routes
-│   │   │   ├── students.ts    # Student CRUD routes
-│   │   │   └── analytics.ts   # Analytics routes
-│   │   ├── types/
-│   │   │   └── index.ts       # TypeScript interfaces
-│   │   └── index.ts           # Main server file
-│   ├── package.json
-│   └── tsconfig.json
-├── electron-app/               # Frontend Electron app
-│   ├── public/
-│   │   ├── electron.ts        # Electron main process
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/        # React components
-│   │   ├── contexts/          # React contexts
-│   │   ├── hooks/             # Custom hooks
-│   │   ├── services/          # API services
-│   │   ├── styles/            # CSS styles
-│   │   └── types/             # TypeScript interfaces
-│   ├── main.js                # Electron main process (compiled)
-│   ├── package.json
-│   └── tsconfig.json
-└── README.md
-```
+---
 
 ## 🔐 Authentication
 
-**Demo Credentials:**
-- Username: `teacher`
-- Password: `password123`
+**Demo Credentials:**  
+- Username: `teacher`  
+- Password: `password123`  
 
-The application uses JWT tokens for authentication with a 24-hour expiration time.
+Authentication uses **JWT tokens** with a **24-hour expiration**.  
+
+---
 
 ## 📊 API Endpoints
 
 ### Authentication
-- `POST /auth/login` - Login with username/password
+- `POST /auth/login` → Login with username/password  
 
 ### Students
-- `GET /students` - Get all students (with optional subject filter)
-- `POST /students` - Create new student
-- `PUT /students/:id` - Update student
-- `DELETE /students/:id` - Delete student
+- `GET /students` → Fetch all students (with optional filters)  
+- `POST /students` → Create new student  
+- `PUT /students/:id` → Update student  
+- `DELETE /students/:id` → Delete student  
 
 ### Analytics
-- `GET /analytics` - Get dashboard analytics
+- `GET /analytics` → Total count, subject averages, recent additions  
+
+---
 
 ## 🎨 UI Components
 
-### Login Page
-- Clean, modern login form
-- Input validation with error messages
-- Demo credentials display
+- **Login Page** → Validated login form  
+- **Student List** → Searchable/filterable table with edit/delete  
+- **Student Form** → Add/Edit student with validation  
+- **Analytics Dashboard** → Stats, averages, recent additions  
 
-### Dashboard
-- Tabbed navigation (Students, Add Student, Analytics)
-- Responsive layout with header and logout
+---
 
-### Student List
-- Searchable and filterable table
-- Subject badges with color coding
-- Grade badges with performance indicators
-- Edit/Delete actions
+## 🔒 Security
 
-### Student Form
-- Add/Edit student with validation
-- Subject dropdown (Math, Science, English, History)
-- Grade input (0-100)
-- Form error handling
+- JWT-based auth with expiration  
+- Input validation (client + server)  
+- SQL injection prevention via parameterized queries  
+- CORS enabled only for Electron app  
+- Electron security (context isolation, no node integration in renderer)  
 
-### Analytics Dashboard
-- Total students count
-- Average grades by subject with progress bars
-- Recent additions list
-- Performance summary statistics
-
-## 🔧 Technical Decisions
-
-### Backend
-- **Express.js**: Robust web framework for Node.js
-- **TypeScript**: Type safety and better development experience
-- **SQLite**: Lightweight database perfect for desktop apps
-- **JWT**: Stateless authentication suitable for desktop apps
-- **express-validator**: Comprehensive input validation
-
-### Frontend
-- **Electron**: Cross-platform desktop app framework
-- **React**: Component-based UI library
-- **TypeScript**: Type safety and better development experience
-- **react-hook-form**: Performant form handling with validation
-- **Yup**: Schema validation for forms
-- **Axios**: HTTP client with interceptors for API calls
-
-### Architecture
-- **Separation of Concerns**: Clear separation between backend and frontend
-- **Context Pattern**: Centralized authentication state management
-- **Custom Hooks**: Reusable API logic
-- **Component Composition**: Modular and maintainable UI components
-
-## 🚨 Error Handling
-
-- **Backend**: Comprehensive error middleware with proper HTTP status codes
-- **Frontend**: Error boundaries and user-friendly error messages
-- **Validation**: Client and server-side validation with clear feedback
-- **Loading States**: Visual feedback during API operations
-
-## 🎯 Performance Optimizations
-
-- **React Hooks**: Efficient state management and re-renders
-- **Memoization**: Optimized component re-rendering
-- **Lazy Loading**: Code splitting for better performance
-- **Database Indexing**: Optimized queries for better performance
-
-## 🔒 Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Input Validation**: Server-side validation for all inputs
-- **CORS Configuration**: Proper cross-origin resource sharing
-- **SQL Injection Prevention**: Parameterized queries
-- **XSS Protection**: Helmet middleware for security headers
-
-## 📱 Responsive Design
-
-The application is fully responsive and works well on different screen sizes:
-- Desktop: Optimized for 1200x800 window
-- Tablet: Responsive grid layouts
-- Mobile: Stack layouts and touch-friendly interfaces
-
-## 🧪 Testing Considerations
-
-The codebase is structured for easy testing with:
-- **Modular Components**: Easy to unit test
-- **Custom Hooks**: Testable business logic
-- **API Services**: Mockable external dependencies
-- **Type Safety**: Compile-time error detection
+---
 
 ## 🚀 Deployment
 
 ### Development
-1. Start backend: `cd server && npm run dev`
-2. Start frontend: `cd electron-app && npm start`
+```bash
+# Terminal 1
+cd server && npm run dev
+
+# Terminal 2
+cd electron-app && npm run electron
+```
 
 ### Production
-1. Build backend: `cd server && npm run build`
-2. Build and package app: `cd electron-app && npm run dist`
+```bash
+# Backend
+cd server && npm run build
+
+# Frontend
+cd electron-app && npm run dist
+```
+
+---
 
 ## 📝 Future Enhancements
+- Multiple teacher accounts with role-based access  
+- Export data to PDF/Excel  
+- Database migrations  
+- Advanced analytics (charts, trends)  
+- Dark/Light mode toggle  
+- Offline support with caching  
 
-- **Database Migration System**: Version-controlled database changes
-- **User Management**: Multiple teacher accounts
-- **Export Functionality**: PDF/Excel export of student data
-- **Backup/Restore**: Data backup and restoration features
-- **Advanced Analytics**: More detailed performance metrics
-- **Notification System**: Alerts and reminders
-- **Theme Support**: Dark/light mode toggle
-
-## 🤝 Contributing
-
-This project follows industry best practices for maintainability:
-- **TypeScript**: Full type safety
-- **ESLint**: Code quality and consistency
-- **Prettier**: Code formatting
-- **Conventional Commits**: Standardized commit messages
-- **Component Documentation**: Clear component interfaces
+---
 
 ## 📄 License
-
-This project is licensed under the ISC License.
+This project is licensed under the **ISC License**.  

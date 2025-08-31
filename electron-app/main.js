@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
-const isDev = require('electron-is-dev');
+// const isDev = require('electron-is-dev');
 
 let mainWindow;
 app.disableHardwareAcceleration();
@@ -46,11 +46,11 @@ const createWindow = () => {
     resizable: false
   });
 
-  const startUrl = isDev
-    ? 'http://localhost:5173'
-    : `file://${path.join(__dirname, './build/index.html')}`;
-
-  mainWindow.loadURL(startUrl);
+  // const startUrl = isDev
+  //   ? 'http://localhost:5173'
+  //   : `file://${path.join(__dirname, './build/index.html')}`;
+  // mainWindow.loadURL(startUrl);
+  mainWindow.loadFile(path.join("./dist/index.html")).catch((err)=>console.log(err));
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
