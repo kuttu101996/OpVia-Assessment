@@ -13,33 +13,39 @@
     "dist": "npm run electron-build && electron-builder",
     "start": "npm run electron-dev"
   },
-  "keywords": ["electron", "react", "typescript", "teacher", "dashboard"],
+  "keywords": [
+    "electron",
+    "react",
+    "typescript",
+    "teacher",
+    "dashboard"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hookform/resolvers": "^3.3.1",
+    "axios": "^1.5.0",
     "electron": "^27.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
-    "axios": "^1.5.0",
     "react-hook-form": "^7.45.4",
-    "@hookform/resolvers": "^3.3.1",
+    "react-router-dom": "^6.15.0",
     "yup": "^1.3.2"
   },
   "devDependencies": {
+    "@types/node": "^20.5.9",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@types/node": "^20.5.9",
     "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.1",
+    "electron-builder": "^24.6.4",
+    "electron-is-dev": "^2.0.0",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "electron-builder": "^24.6.4",
-    "concurrently": "^8.2.1",
-    "wait-on": "^7.0.1",
-    "electron-is-dev": "^2.0.0",
-    "tailwindcss": "^3.3.0",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24"
+    "wait-on": "^7.0.1"
   },
   "browserslist": {
     "production": [

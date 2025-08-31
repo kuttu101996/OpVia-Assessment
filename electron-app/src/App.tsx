@@ -1,12 +1,13 @@
-import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuth } from './contexts/AuthContext'
-import Login from './components/Login'
-import Dashboard from './components/Dashboard'
-import Layout from './components/Layout'
+// App.tsx - Updated for proper layout structure
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
+import Layout from './components/Layout';
+import Dashboard from './components/Dashboard';
+import Login from './components/Login';
 
 const App: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth()
+  const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (
@@ -14,15 +15,15 @@ const App: React.FC = () => {
         <div className="loading-spinner"></div>
         <p className="mt-4 text-gray-600">Loading...</p>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="app-layout bg-gray-50">
       <Routes>
-        <Route 
-          path="/login" 
-          element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" replace />} 
+        <Route
+          path="/login"
+          element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" replace />}
         />
         <Route
           path="/dashboard/*"
@@ -36,13 +37,14 @@ const App: React.FC = () => {
             )
           }
         />
-        <Route 
-          path="/" 
-          element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />} 
+        <Route
+          path="/"
+          element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />}
+          // element={<Login />}
         />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
