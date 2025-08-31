@@ -2,7 +2,7 @@
   "name": "teacher-dashboard-electron",
   "version": "1.0.0",
   "description": "Teacher Dashboard Desktop Application",
-  "main": "public/electron.js",
+  "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -63,7 +63,7 @@
     },
     "files": [
       "build/**/*",
-      "dist/main.js",
+      "main.js",
       "node_modules/**/*"
     ]
   }

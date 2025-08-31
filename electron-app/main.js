@@ -50,7 +50,9 @@ const createWindow = () => {
   //   ? 'http://localhost:5173'
   //   : `file://${path.join(__dirname, './build/index.html')}`;
   // mainWindow.loadURL(startUrl);
-  mainWindow.loadFile(path.join("./dist/index.html")).catch((err)=>console.log(err));
+  mainWindow.loadFile(path.join(__dirname, "dist", "index.html")).catch((err) =>
+    console.log("Failed to load file:", err)
+  );
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
